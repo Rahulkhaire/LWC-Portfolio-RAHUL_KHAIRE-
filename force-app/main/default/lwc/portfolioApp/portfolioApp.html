@@ -1,0 +1,127 @@
+<template>
+<div class={themeClass}>
+  <header class="nav">
+    <span class="logo">RK<span>.</span></span>
+    <nav aria-label="Main navigation"><template for:each={nav} for:item="n"><button key={n.id} type="button" data-id={n.id} onclick={scrollTo}>{n.label}</button></template></nav>
+    <button class="theme-toggle" type="button" onclick={toggleTheme} aria-label={themeToggleLabel} title={themeToggleLabel}>
+      <span aria-hidden="true">{themeIcon}</span> {themeToggleText}
+    </button>
+  </header>
+
+  <section data-section="home" class="hero">
+    <div class="hero-text">
+      <p class="hello">Hello, I'm</p>
+      <h1>Rahul Khaire</h1>
+      <h2>{label.TITLE}</h2>
+      <p class="lead">{label.INTRO}</p>
+      <div class="btns">
+        <lightning-button variant="brand" label="View Projects" data-id="projects" onclick={scrollTo}></lightning-button>
+        <lightning-button label="Download Resume" icon-name="utility:download" onclick={downloadResume}></lightning-button>
+        <lightning-button label="Contact Me" data-id="contact" onclick={scrollTo}></lightning-button>
+        <lightning-button label="GitHub" icon-name="utility:link" onclick={openGithub}></lightning-button>
+        <lightning-button label="LinkedIn" icon-name="utility:link" onclick={openLinkedIn}></lightning-button>
+        <lightning-button label="Trailhead" icon-name="utility:link" onclick={openTrailhead}></lightning-button>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="cloud c1">☁️ Sales</div><div class="cloud c2">☁️ Service</div><div class="cloud c3">🤖 Agentforce</div><div class="cloud c4">⚡ LWC</div>
+      <div class="core">Apex</div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>{counterDisplay.badges}</b><span>Trailhead Badges</span></div>
+      <div class="stat"><b>{counterDisplay.supers}</b><span>Superbadges</span></div>
+      <div class="stat"><b>{counterDisplay.projects}</b><span>Salesforce Projects</span></div>
+      <div class="stat"><b>AI ✓</b><span>Salesforce AI Certified</span></div>
+      <div class="stat"><b>{counterDisplay.interns}</b><span>Salesforce Internships</span></div>
+    </div>
+  </section>
+
+  <section data-section="about" class="sec">
+    <h3>About Me</h3>
+    <div class="grid2">
+      <div>
+        <p>I'm a Salesforce Developer and AI enthusiast pursuing a B.Tech in AI &amp; Data Science. I build CRM automation, integrations and AI-powered business apps using Apex, Lightning Web Components, Flows and Agentforce.</p>
+        <div class="chips"><template for:each={aboutTags} for:item="t"><span key={t} class="chip">{t}</span></template></div>
+      </div>
+      <ol class="timeline"><template for:each={aboutTimeline} for:item="t">
+        <li key={t.id}><small>{t.when}</small><strong>{t.what}</strong><em>{t.where}</em></li></template></ol>
+    </div>
+  </section>
+
+  <section data-section="skills" class="sec">
+    <h3>Skills</h3>
+    <div class="tabs"><template for:each={skillTabs} for:item="s">
+      <button key={s.category} class={s.cls} data-idx={s.idx} onclick={pickSkill}>{s.icon} {s.category}</button></template></div>
+    <div class="cards"><template for:each={activeSkillItems} for:item="i"><div key={i} class="card skill">{i}</div></template></div>
+  </section>
+
+  <section data-section="projects" class="sec">
+    <h3>Projects</h3>
+    <div class="cards">
+      <template for:each={projects} for:item="p">
+        <article key={p.id} class="card project">
+          <div class="pimg">{p.icon}</div>
+          <h4>{p.title}</h4>
+          <p>{p.description}</p>
+          <div class="chips"><template for:each={p.technologies} for:item="t"><span key={t} class="chip">{t}</span></template></div>
+          <ul class="feat"><template for:each={p.features} for:item="f"><li key={f}>{f}</li></template></ul>
+          <div class="btns">
+            <lightning-button-icon icon-name="utility:link" alternative-text="GitHub" data-url={p.githubUrl} onclick={openUrl}></lightning-button-icon>
+            <lightning-button label="Live Demo" data-url={p.demoUrl} disabled={p.noDemo} onclick={openUrl}></lightning-button>
+            <lightning-button variant="brand" label="View Details" data-id={p.id} onclick={openProject}></lightning-button>
+          </div>
+        </article>
+      </template>
+    </div>
+  </section>
+
+  <section data-section="experience" class="sec">
+    <h3>Experience</h3>
+    <ol class="timeline"><template for:each={data.experience} for:item="e">
+      <li key={e.id}><small>{e.period}</small><strong>{e.role}</strong><em>{e.company}</em>
+        <ul><template for:each={e.points} for:item="p"><li key={p}>{p}</li></template></ul></li></template></ol>
+  </section>
+
+  <section data-section="certifications" class="sec">
+    <h3>Certifications</h3>
+    <div class="cards"><template for:each={certs} for:item="c">
+      <div key={c.id} class="card cert"><div class="pimg">🏅</div><h4>{c.name}</h4><p>{c.issuer}</p>
+        <template if:true={c.hasDate}><small>{c.date}</small></template>
+        <lightning-button label="Verify" data-url={c.url} disabled={c.noUrl} onclick={openUrl}></lightning-button></div></template></div>
+  </section>
+
+  <section data-section="trailhead" class="sec trail">
+    <h3>Trailhead</h3>
+    <div class="stats">
+      <div class="stat"><b>{counterDisplay.badges}</b><span>Badges</span></div>
+      <div class="stat"><b>{counterDisplay.supers}</b><span>Superbadges</span></div>
+      <div class="stat"><b>{counterDisplay.points}</b><span>Points</span></div>
+      <div class="stat"><b>{counterDisplay.trails}</b><span>Trails</span></div>
+    </div>
+    <div class="chips center"><template for:each={ranks} for:item="r"><span key={r} class="chip big">🏆 {r}</span></template></div>
+    <lightning-button variant="brand" label="View Trailhead Profile" onclick={openTrailhead}></lightning-button>
+  </section>
+
+  <section data-section="education" class="sec">
+    <h3>Education</h3>
+    <ol class="timeline"><template for:each={data.education} for:item="d">
+      <li key={d.id}><small>{d.period}</small><strong>{d.degree}</strong><em>{d.school}</em><span class="score">{d.score}</span></li></template></ol>
+  </section>
+
+  <section data-section="contact" class="sec">
+    <h3>Contact</h3>
+    <div class="form">
+      <lightning-input class="cf" name="name" label="Name" required max-length="120" value={form.name} onchange={onField}></lightning-input>
+      <lightning-input class="cf" name="email" type="email" label="Email" required max-length="80" value={form.email} onchange={onField}></lightning-input>
+      <lightning-input class="cf" name="phone" type="tel" label="Phone" max-length="30" value={form.phone} onchange={onField}></lightning-input>
+      <lightning-input class="cf" name="subject" label="Subject" required max-length="150" value={form.subject} onchange={onField}></lightning-input>
+      <lightning-textarea class="cf" name="message" label="Message" required max-length="5000" value={form.message} onchange={onField}></lightning-textarea>
+      <lightning-button variant="brand" label="Send Message" onclick={submit} disabled={sending}></lightning-button>
+    </div>
+  </section>
+
+  <footer>© Rahul Khaire · Built with LWC + Apex on Salesforce</footer>
+
+  <template if:true={selectedProject}><c-project-modal project={selectedProject} onclose={closeProject}></c-project-modal></template>
+</div>
+</template>

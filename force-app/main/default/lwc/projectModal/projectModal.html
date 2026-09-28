@@ -1,0 +1,16 @@
+<template>
+  <div class="backdrop" onclick={close}>
+    <div class="modal" role="dialog" aria-modal="true" onclick={stop}>
+      <button class="x" onclick={close} aria-label="Close">✕</button>
+      <div class="icon">{project.icon}</div>
+      <h2>{project.title}</h2>
+      <p class="type">{project.type}</p>
+      <p>{project.description}</p>
+      <p>{project.details}</p>
+      <h4>Technology</h4>
+      <div class="chips"><template for:each={project.technologies} for:item="t"><span key={t} class="chip">{t}</span></template></div>
+      <h4>Features</h4>
+      <ul><template for:each={project.features} for:item="f"><li key={f}>{f}</li></template></ul>
+    </div>
+  </div>
+</template>
