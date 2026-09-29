@@ -11,7 +11,7 @@ public with sharing class PortfolioController {
     public static Map<String, Object> getPortfolioData() {
         return new Map<String, Object>{
             'projects' => getProjects(), 'skills' => getSkills(),
-            'experience' => getExperience(), 'certifications' => getCertifications(),
+            'experience' => getExperience(),
             'education' => getEducation(), 'achievements' => getAchievements()
         };
     }
@@ -20,16 +20,16 @@ public with sharing class PortfolioController {
     public static List<Map<String, Object>> getProjects() {
         List<Map<String, Object>> projects = new List<Map<String, Object>>{
             proj('p1', 'Smart Medical Inventory & Transfer System', 'Salesforce Solution · Nath Agency', '🏥',
-                'A Salesforce-based medical inventory and surgical instrument distribution solution for managing inventory, orders, shipments and operational workflows.',
-                'The solution brings inventory, order and shipment workflows together, with integrations for payments, maps, identity verification and customer notifications.',
+                'Salesforce solution for medical inventory, orders, shipments and surgical instrument distribution.',
+                'Uses Salesforce records and automation with payment, mapping, identity and messaging integrations.',
                 'Coordinate medical inventory, orders and shipments while keeping operational workflows visible.',
                 'Use Salesforce records and automation as the operational hub, with API integrations supporting payment, location, identity and messaging needs.',
-                'Project focus: inventory tracking, order and shipment management, integrations and automated alerts. The exact individual work split is not published.',
-                new List<String>{'User','Experience Cloud / LWC','Apex / Salesforce','Custom Objects','Integration Layer','Razorpay','Google Maps','IDFY','WhatsApp Cloud API'},
+                'Individual contribution details were not provided; documented scope includes inventory, orders, shipments, integrations and automated alerts.',
+                new List<String>{'Experience Cloud / LWC','Apex / Salesforce','Custom Objects & Automation','Integration Layer','External APIs: Razorpay, Google Maps, IDFY, WhatsApp Cloud API'},
                 'Coordinating inventory, orders and shipments alongside multiple external services.',
                 'Centralized medical inventory and transfer workflows with integrated notifications and service connections.',
                 new List<String>{'Salesforce','Apex','LWC','Flows','REST APIs','Razorpay','Google Maps','IDFY','WhatsApp Cloud API','Platform Events'},
-                new List<String>{'Medicine Inventory','Order Management','Shipment Management','Inventory Tracking','API Integrations','WhatsApp Notifications','Payment Integration','Location / Maps Integration','Automated Alerts'}),
+                new List<String>{'Medicine Inventory','Orders & Shipments','Inventory Tracking','API Integrations','Automated Alerts'}),
             proj('p2', 'Sales Pipeline & Lead Management System', 'Sales Cloud', '📈',
                 'Scalable lead-to-opportunity lifecycle solution with automated lead assignment, opportunity tracking, approval workflows and sales forecasting.',
                 'Leveraged Apex, LWC and Salesforce automation tools to streamline sales operations and improve conversion tracking.',
@@ -41,18 +41,29 @@ public with sharing class PortfolioController {
                 'A structured sales workflow with pipeline visibility and forecasting.',
                 new List<String>{'Sales Cloud','Apex','LWC','Flow','Approval Processes','Reports & Dashboards'},
                 new List<String>{'Lead Management','Opportunity Tracking','Automated Assignment','Approval Workflow','Sales Forecasting','Conversion Tracking'}),
-            proj('p3', 'WhatsApp Customer Support Integration', 'Integration', '💬',
-                'Integrated Salesforce with WhatsApp Cloud API to enable real-time customer engagement, automated case creation, and conversation management.',
-                'Developed Apex REST callouts, asynchronous processing and custom LWCs for seamless communication between customers and support teams.',
+            proj('p3', 'Salesforce + WhatsApp Cloud API Customer Support', 'Salesforce Integration', '💬',
+                'Customer-support integration connecting Salesforce CRM and WhatsApp Cloud API for messaging and case workflows.',
+                'Connects CRM support processes with WhatsApp API communication and asynchronous Salesforce processing.',
                 'Connect customer WhatsApp conversations with Salesforce support and case workflows.',
                 'Use API communication and Salesforce automation to support customer messaging and case creation.',
-                'Project focus: WhatsApp Cloud API integration, Apex callouts, asynchronous processing and support workflows.',
-                new List<String>{'Customer','WhatsApp Cloud API','Apex REST Callouts','Salesforce CRM','Cases','LWC'},
+                'Documented project scope includes WhatsApp API communication, Apex callouts, asynchronous processing and support workflows.',
+                new List<String>{'Salesforce CRM','Apex','REST API','WhatsApp Cloud API','Customer'},
                 'Handling customer conversation events and coordinating API responses with Salesforce processing.',
                 'A CRM-connected messaging workflow for support conversations and case creation.',
                 new List<String>{'Salesforce','Apex REST API','LWC','Queueable Apex','Scheduled Apex','WhatsApp Cloud API'},
-                new List<String>{'Customer Communication','WhatsApp Integration','CRM Automation','Case / Support Workflow','API Communication','Asynchronous Processing'}),
-            proj('p4', 'Automated Exploratory Data Analysis Platform', 'Python · Data Analysis', '📊',
+                new List<String>{'Customer Messaging','WhatsApp Integration','Case Workflow','Apex REST / Async Processing'}),
+            proj('p4', 'Salesforce Career Application System', 'Salesforce Application', '📄',
+                'Guided Salesforce career-application experience for applicant details and resume submissions.',
+                'Uses a two-step LWC interface with Apex, validation, file upload, progress feedback and resume handling.',
+                'Provide applicants a clear, guided flow for submitting career application details and a resume.',
+                'Use a two-step LWC form with validation and progress feedback, with Apex-backed processing and Salesforce file handling.',
+                'Project scope: reusable application UI, input validation, progress state, feedback notifications and resume handling.',
+                new List<String>{'Applicant','LWC Two-step UI','Apex','Validation','File Upload','Resume Handling'},
+                'Keeping a multi-step application understandable while validating inputs and handling uploaded resume files.',
+                'A guided Salesforce application flow with visible progress and submission feedback.',
+                new List<String>{'Salesforce','LWC','Apex','File Upload','Validation','Toast Notifications'},
+                new List<String>{'Two-step Form','Progress Indicator','Validation','File Upload & Resume Handling','Toast Notifications'}),
+            proj('p5', 'Automated Exploratory Data Analysis Platform', 'Python · Data Analysis', '📊',
                 'A Streamlit platform for exploring datasets and presenting data analysis and visualizations.',
                 'The user-provided project summary describes an automated exploratory data analysis workflow built with Python, Pandas and Streamlit.',
                 'Make dataset exploration and initial analysis accessible through a focused interface.',
@@ -63,7 +74,7 @@ public with sharing class PortfolioController {
                 'A browser-based workflow for data exploration and visualization.',
                 new List<String>{'Python','Pandas','Streamlit','Data Analysis','Visualization'},
                 new List<String>{'Dataset Exploration','Data Analysis','Visualizations','Streamlit Interface'}),
-            proj('p5', 'Dynamic AutoML Platform', 'Python · Machine Learning', '🧠',
+            proj('p6', 'Dynamic AutoML Platform', 'Python · Machine Learning', '🧠',
                 'A Python-based AutoML platform using Flask, H2O.ai and PyCaret.',
                 'The user-provided project summary describes a dynamic machine-learning workflow using Flask with H2O.ai and PyCaret.',
                 'Provide an application workflow for experimenting with automated machine-learning tools.',
@@ -74,7 +85,7 @@ public with sharing class PortfolioController {
                 'A web application demonstrating an AutoML workflow.',
                 new List<String>{'Python','Flask','H2O.ai','PyCaret','Machine Learning'},
                 new List<String>{'AutoML Workflow','Machine Learning','Flask Application'}),
-            proj('p6', 'Movie Recommendation System', 'Python · Machine Learning', '🎬',
+            proj('p7', 'Movie Recommendation System', 'Python · Machine Learning', '🎬',
                 'A Streamlit movie recommendation application using machine learning.',
                 'The user-provided project summary identifies Python, Streamlit and machine learning as the project technologies.',
                 'Help users explore movie recommendations through a simple application interface.',
@@ -88,6 +99,12 @@ public with sharing class PortfolioController {
         };
         projects[0].put('organization', 'Nath Agency');
         projects[0].put('location', 'Chhatrapati Sambhajinagar');
+        for (Integer index = 0; index < projects.size(); index++) {
+            String projectCategory = new Set<Integer>{0, 2, 3}.contains(index)
+                ? 'featured-salesforce'
+                : (index == 1 ? 'additional-salesforce' : 'secondary');
+            projects[index].put('category', projectCategory);
+        }
         return projects;
     }
 
@@ -97,43 +114,26 @@ public with sharing class PortfolioController {
             cat('Salesforce Development', '⚡', 'Build platform features and business automation with Salesforce-native tools.', new List<String>{'Apex','Triggers','Apex Classes','Test Classes','SOQL','SOSL','Lightning Web Components','Visualforce','Flows','Approval Processes','Security','Data Modeling'}),
             cat('Salesforce Platform', '☁️', 'Salesforce clouds, extensions and AI capabilities for CRM workflows.', new List<String>{'Sales Cloud','Service Cloud','Experience Cloud','Education Cloud','HEDA','OmniStudio','Agentforce','Prompt Builder'}),
             cat('Integration', '🔗', 'API and event-based connections between Salesforce and external services.', new List<String>{'REST API','Postman','WhatsApp Cloud API','Razorpay','Google Maps API','IDFY','Platform Events','Email Integrations'}),
-            cat('Programming', '💻', 'Languages used across Salesforce development and data applications.', new List<String>{'Java','JavaScript','Python','SQL'}),
-            cat('AI / Data', '🧠', 'AI, machine-learning and data-analysis concepts included in the portfolio.', new List<String>{'Machine Learning','Generative AI','Agentforce','Explainable AI','CNN','RNN','LSTM','GAN','AutoML','Data Analysis'}),
-            cat('Cloud / Tools', '🧰', 'Development environments, cloud platforms and application frameworks.', new List<String>{'GitHub','VS Code','Google Cloud','AWS','OCI','Streamlit','Flask'})
+            cat('Programming', '💻', 'Supporting languages used across applications and data projects.', new List<String>{'Java','Python','JavaScript','SQL'}),
+            cat('AI / Data', '🧠', 'AI, machine-learning and data-analysis concepts supporting the Salesforce profile.', new List<String>{'Machine Learning','Generative AI','Explainable AI','CNN','RNN','LSTM','GAN','AutoML','Data Analysis'}),
+            cat('Cloud / Tools', '🧰', 'Cloud platforms and development tools used alongside Salesforce.', new List<String>{'AWS','Google Cloud','Oracle Cloud','GitHub','VS Code','Postman','Streamlit','Flask','H2O.ai','PyCaret'})
         };
     }
 
     @AuraEnabled(cacheable=true)
     public static List<Map<String, Object>> getExperience() {
         return new List<Map<String, Object>>{
-            new Map<String, Object>{'id'=>'e1','role'=>'Salesforce AI Intern','company'=>'Pinnacle Technology','period'=>'Jan 2026 – May 2026',
-                'points'=>new List<String>{'Built Salesforce AI and automation solutions using Agentforce AI agents','Developed AI agents to automate workflows and improve process efficiency','Supported requirement analysis, testing and deployment','Worked with Salesforce Admin tools, Apex and LWC'}},
-            new Map<String, Object>{'id'=>'e2','role'=>'Salesforce Intern','company'=>'Cendance Systems Inc.','period'=>'Feb 2025 – Jun 2025',
-                'points'=>new List<String>{'Supported Salesforce CRM implementation and optimization','Assisted in requirement analysis, automation and workflow improvements','Collaborated with cross-functional teams in a virtual environment'}}
+            new Map<String, Object>{'id'=>'e1','role'=>'Salesforce Developer Intern','company'=>'Pinnacle Technologies','period'=>'Jan 2025 – Apr 2026'},
+            new Map<String, Object>{'id'=>'e2','role'=>'Salesforce Intern','company'=>'Cendance Systems Inc.','period'=>'Feb 2025 – May 2025'}
         };
-    }
-
-    @AuraEnabled(cacheable=true)
-    public static List<Map<String, Object>> getCertifications() {
-        // Credential dates and verification URLs remain blank until supplied.
-        List<Map<String, Object>> out = new List<Map<String, Object>>();
-        for (List<String> c : new List<List<String>>{
-            new List<String>{'Salesforce AI Associate','Salesforce'},
-            new List<String>{'Oracle Cloud Infrastructure 2024 Certified AI Foundations Associate','Oracle'},
-            new List<String>{'GitHub Foundation Certification','GitHub'},
-            new List<String>{'Career Essentials in GitHub Professional Certificate','GitHub'},
-            new List<String>{'Google Play Store Listing Certificate','Google'},
-            new List<String>{'Google Study Jam','Google'},
-            new List<String>{'GET AI Study Jam','GET'} }) {
-            out.add(new Map<String, Object>{'id'=>c[0],'name'=>c[0],'issuer'=>c[1],'date'=>'','url'=>''});
-        }
-        return out;
     }
 
     @AuraEnabled(cacheable=true)
     public static List<Map<String, Object>> getEducation() {
         return new List<Map<String, Object>>{
-            new Map<String, Object>{'id'=>'d1','school'=>'Maharashtra Institute of Technology','degree'=>'B.Tech — Artificial Intelligence & Data Science','period'=>'2022 – 2026','score'=>'CGPA: 7.10'}
+            new Map<String, Object>{'id'=>'d1','school'=>'Maharashtra Institute of Technology — Aurangabad','degree'=>'B.Tech — Artificial Intelligence & Data Science','period'=>'2022 – 2026','score'=>'CGPA: 7.10'},
+            new Map<String, Object>{'id'=>'d2','school'=>'Shiveswar Vidyalaya — Aurangabad','degree'=>'Higher Secondary Certificate (HSC)','period'=>'2021 – 2022','score'=>'Percentage: 86.40%'},
+            new Map<String, Object>{'id'=>'d3','school'=>'Nageswar Vidyalaya — Aurangabad','degree'=>'Secondary School Certificate (SSC)','period'=>'2019 – 2020','score'=>'Percentage: 89.20%'}
         };
     }
 
@@ -141,7 +141,13 @@ public with sharing class PortfolioController {
     public static Map<String, Object> getAchievements() {
         return new Map<String, Object>{
             'badges'=>210,'superbadges'=>6,'points'=>101500,'trails'=>18,
-            'ranks'=>new List<String>{'Agentblazer Innovator','Prompt Builder Templates Superbadge Unit','Agentforce for Service Superbadge Unit','Apex Callouts Superbadge','Super Quest: Apex Callouts'}
+            'journey'=>new List<Map<String, String>>{
+                new Map<String, String>{'name'=>'Agentblazer Innovator','type'=>'Trailblazer rank'},
+                new Map<String, String>{'name'=>'Prompt Builder Templates Superbadge Unit','type'=>'Superbadge unit'},
+                new Map<String, String>{'name'=>'Agentforce for Service Superbadge Unit','type'=>'Superbadge unit'},
+                new Map<String, String>{'name'=>'Apex Callouts Superbadge','type'=>'Superbadge'},
+                new Map<String, String>{'name'=>'Super Quest: Apex Callouts','type'=>'Super Quest'}
+            }
         };
     }
 

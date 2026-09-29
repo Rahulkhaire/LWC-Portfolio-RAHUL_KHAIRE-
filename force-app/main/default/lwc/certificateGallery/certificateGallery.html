@@ -1,0 +1,70 @@
+<template>
+  <section class="gallery" aria-labelledby="gallery-heading">
+    <div class="gallery-heading">
+      <div>
+        <p class="eyebrow">Verified learning &amp; experience</p>
+        <h2 id="gallery-heading">Certifications &amp; Credentials</h2>
+        <p class="gallery-intro">Original certificate files from the portfolio credential folder. Dates and IDs are shown only when legible on the source file.</p>
+      </div>
+      <div class="credential-count" aria-live="polite"><strong>{certificateCount}</strong><span>certificates &amp; credentials</span></div>
+    </div>
+
+    <div class="gallery-tools">
+      <div class="category-filters" role="group" aria-label="Filter certificates by category">
+        <template for:each={categories} for:item="category">
+          <button key={category.value} class={category.buttonClass} type="button" data-category={category.value} aria-pressed={category.selected} onclick={handleCategory}>{category.name}</button>
+        </template>
+      </div>
+    </div>
+
+    <div class="certificate-carousel" aria-label="Certificate carousel">
+      <button class="carousel-control previous" type="button" onclick={showPrevious} aria-label="Show previous certificates">‹</button>
+      <div class="certificate-grid" tabindex="0" aria-label="Certificates. Swipe horizontally or use the arrow controls to browse.">
+        <template for:each={certificates} for:item="certificate">
+          <article key={certificate.id} class={certificate.cardClass}>
+          <button class="preview-button" type="button" data-id={certificate.id} onclick={openCertificate} aria-label={certificate.viewLabel}>
+            <img src={certificate.imageUrl} alt={certificate.imageAlt} loading="lazy" />
+            <span class="preview-hint" aria-hidden="true">View certificate</span>
+          </button>
+          <div class="certificate-content">
+            <div class="certificate-meta"><span class="category-label">{certificate.category}</span><span class="type-label">{certificate.type}</span><template if:true={certificate.featured}><span class="featured-label">Featured</span></template></div>
+            <h3>{certificate.name}</h3>
+            <p class="issuer">{certificate.issuer}</p>
+            <template if:true={certificate.hasDate}><p class="date">{certificate.date}</p></template>
+            <template if:true={certificate.hasPeriod}><p class="date">Internship period: {certificate.period}</p></template>
+            <p class="description">{certificate.description}</p>
+            <template if:true={certificate.hasCredentialId}><p class="reference">Credential ID: {certificate.credentialId}</p></template>
+            <template if:true={certificate.hasReference}><p class="reference">{certificate.referenceLabel}: {certificate.referenceId}</p></template>
+            <div class="certificate-actions">
+              <button class="view-button" type="button" data-id={certificate.id} onclick={openCertificate}>View Certificate</button>
+              <template if:true={certificate.hasCredentialUrl}><a href={certificate.credentialUrl} target="_blank" rel="noopener noreferrer">Verify credential</a></template>
+            </div>
+          </div>
+          </article>
+        </template>
+        <template if:false={hasResults}>
+          <div class="empty-state" role="status">No certificates are available in this category.</div>
+        </template>
+      </div>
+      <button class="carousel-control next" type="button" onclick={showNext} aria-label="Show more certificates">›</button>
+    </div>
+  </section>
+
+  <template if:true={hasSelection}>
+    <div class="lightbox-backdrop" onclick={handleBackdropClick}>
+      <section class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" onclick={stopPropagation}>
+        <header class="lightbox-header">
+          <div><p class="eyebrow">{selectedCertificate.type}</p><h2 id="lightbox-title">{selectedCertificate.name}</h2><p>{selectedCertificate.issuer}</p></div>
+          <div class="lightbox-controls">
+            <button class="lightbox-control" type="button" onclick={toggleZoom} aria-label={zoomLabel}>{zoomText}</button>
+            <a class="lightbox-control" href={selectedCertificate.imageUrl} target="_blank" rel="noopener noreferrer">Open original</a>
+            <button class="lightbox-control lightbox-close" type="button" onclick={closeCertificate} aria-label="Close certificate preview">×</button>
+          </div>
+        </header>
+        <div class="lightbox-stage" tabindex="0" aria-label="Certificate preview. Use the zoom control to enlarge the image.">
+          <img class={selectedImageClass} src={selectedCertificate.imageUrl} alt={selectedCertificate.imageAlt} />
+        </div>
+      </section>
+    </div>
+  </template>
+</template>

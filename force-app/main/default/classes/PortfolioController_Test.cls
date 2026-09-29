@@ -16,15 +16,21 @@ private class PortfolioController_Test {
 
     @IsTest static void contentGetters() {
         Map<String, Object> d = PortfolioController.getPortfolioData();
-        System.assertEquals(6, d.size());
-        System.assertEquals(6, PortfolioController.getProjects().size());
+        System.assertEquals(5, d.size());
+        System.assertEquals(7, PortfolioController.getProjects().size());
         System.assertEquals('Smart Medical Inventory & Transfer System', PortfolioController.getProjects()[0].get('title'));
+        System.assertEquals('Salesforce + WhatsApp Cloud API Customer Support', PortfolioController.getProjects()[2].get('title'));
+        System.assertEquals('Salesforce Career Application System', PortfolioController.getProjects()[3].get('title'));
+        System.assertEquals('featured-salesforce', PortfolioController.getProjects()[3].get('category'));
         System.assertEquals('', PortfolioController.getProjects()[0].get('githubUrl'), 'Do not expose a generic profile as a project repository.');
-        System.assertEquals(7, PortfolioController.getCertifications().size());
         System.assertEquals(2, PortfolioController.getExperience().size());
-        System.assertEquals(1, PortfolioController.getEducation().size());
+        System.assertEquals(3, PortfolioController.getEducation().size());
+        System.assertEquals('Shiveswar Vidyalaya — Aurangabad', PortfolioController.getEducation()[1].get('school'));
+        System.assertEquals('Percentage: 89.20%', PortfolioController.getEducation()[2].get('score'));
         System.assertEquals(6, PortfolioController.getSkills().size());
         System.assertEquals(210, PortfolioController.getAchievements().get('badges'));
+        System.assertEquals(5, ((List<Map<String, String>>)PortfolioController.getAchievements().get('journey')).size());
+        System.assertEquals('Superbadge unit', ((List<Map<String, String>>)PortfolioController.getAchievements().get('journey'))[1].get('type'));
     }
     @IsTest static void submitValid() {
         System.runAs(portfolioUser()) {

@@ -6,22 +6,14 @@
         <span class="icon" aria-hidden="true">{project.icon}</span>
         <div><p class="type">{project.type}</p><h2 id="project-title">{project.title}</h2></div>
       </div>
-      <p class="summary">{project.description}</p>
-
       <div class="detail-grid">
         <section class="detail-block"><h3>Problem</h3><p>{project.problem}</p></section>
         <section class="detail-block"><h3>Solution</h3><p>{project.solution}</p></section>
-        <section class="detail-block"><h3>Project scope</h3><p>{project.contribution}</p></section>
-        <section class="detail-block"><h3>Challenges &amp; design considerations</h3><p>{project.challenge}</p></section>
-        <section class="detail-block"><h3>Outcome focus</h3><p>{project.outcome}</p></section>
+        <section class="detail-block"><h3>My Contribution</h3><p>{project.contribution}</p></section>
       </div>
 
-      <section class="modal-section" aria-labelledby="architecture-heading">
-        <h3 id="architecture-heading">Architecture</h3>
-        <ol class="architecture-flow"><template for:each={project.architecture} for:item="step"><li key={step}>{step}</li></template></ol>
-      </section>
       <section class="modal-section" aria-labelledby="technology-heading">
-        <h3 id="technology-heading">Technology stack</h3>
+        <h3 id="technology-heading">Tech Stack</h3>
         <div class="chips"><template for:each={project.technologies} for:item="technology"><span key={technology} class="chip">{technology}</span></template></div>
       </section>
       <section class="modal-section" aria-labelledby="features-heading">
@@ -33,7 +25,6 @@
         <template if:true={hasDemo}><a class="action-link primary" href={project.demoUrl} target="_blank" rel="noopener noreferrer">Live Demo</a></template>
         <template if:true={hasCaseStudy}><a class="action-link" href={project.caseStudyUrl} target="_blank" rel="noopener noreferrer">Case Study</a></template>
       </div>
-    </section>
     </section>
   </div>
 </template>

@@ -10,16 +10,24 @@ Deploy source changes with `sf project deploy start -d force-app` (a `sf project
 
 Every inserted portfolio contact now triggers one plain-text notification email to `rahul.khaire@mit.asia`, including all submitted fields. In Setup → Organization-Wide Addresses, add and verify `rahul.khaire@mit.asia`; the handler will use it as the sender when configured. Also ensure Setup → Deliverability → Access to Send Email is set to **All Email**. The trigger sends one consolidated email for bulk inserts and does not roll back saved contacts if mail delivery is unavailable.
 
-Add real certification dates/URLs, project GitHub/demo links in `PortfolioController.cls`.
+Project-specific GitHub/demo links are intentionally blank until real URLs are available. Certificate records and verified source-file metadata are maintained in `certificateGallery.js`.
+
+### Certificate gallery assets
+
+- Source images live in `force-app/main/default/Certifications/`; the gallery renders the original image files from the deployable `PortfolioCertificates` ZIP static resource.
+- The gallery's centralized certificate records are in `force-app/main/default/lwc/certificateGallery/certificateGallery.js`. The visible total is derived from the records in that array; categories and filters are generated from the same data.
+- When adding/removing a certificate, update its metadata record and regenerate `force-app/main/default/staticresources/PortfolioCertificates.resource` with the source images. Salesforce static resources cannot enumerate files from a source folder at runtime, so the array is the catalog and its length is the live displayed count.
+- The source folder currently contains two Oracle AI Foundations scans with conflicting printed dates. The gallery includes one higher-resolution original and omits the date rather than choosing between them.
+- The gallery categorizes only areas represented by files: Salesforce, Cloud, AI / Data, and Development. Original images are loaded with browser lazy loading; selecting a card opens a keyboard-accessible zoomable preview and an original-image link.
 
 ### Experience Cloud production configuration
 
-- In Experience Builder, configure the Home page SEO title as **Rahul Khaire | Salesforce Developer** and the meta description as **Rahul Khaire — Salesforce Developer specializing in Apex, Lightning Web Components, integrations, automation, AI and Salesforce CRM solutions.** LWC runs inside Salesforce's page shell and cannot set the document's SEO metadata itself.
+- In Experience Builder, configure the Home page SEO title as **Rahul Khaire | Salesforce Developer** and the meta description as **Rahul Khaire — Salesforce Developer specializing in Apex, Lightning Web Components, SOQL, integrations, automation, OmniStudio, Agentforce and Salesforce CRM solutions.** LWC runs inside Salesforce's page shell and cannot set the document's SEO metadata itself.
 - Publish the Experience Cloud site after deployment; deploying source does not publish site changes.
 - The resume PDF is a public static resource. Do not place confidential or private content in it.
 - The contact form includes client-side validation, server-side validation and a honeypot field. A honeypot is basic spam friction, not rate limiting or CAPTCHA; configure Salesforce-supported CAPTCHA or another abuse control if public traffic warrants it.
 - Project-specific GitHub, demo and case-study links are intentionally blank until verified URLs are provided. Add actual URLs in `PortfolioController.cls`; do not substitute profile URLs.
-- Credential dates and verification URLs are intentionally blank until supplied. Confirm certification names and the portfolio's static Trailhead figures against the current credential/profile before representing them to recruiters.
+- Certificate dates and verification links are included only when readable in the source image; ambiguous dates and unavailable links are omitted. Confirm the portfolio's static Trailhead figures against the current profile before representing them to recruiters.
 
 ### Deployment and smoke tests
 
