@@ -1,16 +1,39 @@
 <template>
   <div class="backdrop" onclick={close}>
-    <div class="modal" role="dialog" aria-modal="true" onclick={stop}>
-      <button class="x" onclick={close} aria-label="Close">✕</button>
-      <div class="icon">{project.icon}</div>
-      <h2>{project.title}</h2>
-      <p class="type">{project.type}</p>
-      <p>{project.description}</p>
-      <p>{project.details}</p>
-      <h4>Technology</h4>
-      <div class="chips"><template for:each={project.technologies} for:item="t"><span key={t} class="chip">{t}</span></template></div>
-      <h4>Features</h4>
-      <ul><template for:each={project.features} for:item="f"><li key={f}>{f}</li></template></ul>
-    </div>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="project-title" onclick={stop} tabindex="-1">
+      <button class="close-button" type="button" onclick={close} aria-label="Close project details">×</button>
+      <div class="modal-heading">
+        <span class="icon" aria-hidden="true">{project.icon}</span>
+        <div><p class="type">{project.type}</p><h2 id="project-title">{project.title}</h2></div>
+      </div>
+      <p class="summary">{project.description}</p>
+
+      <div class="detail-grid">
+        <section class="detail-block"><h3>Problem</h3><p>{project.problem}</p></section>
+        <section class="detail-block"><h3>Solution</h3><p>{project.solution}</p></section>
+        <section class="detail-block"><h3>Project scope</h3><p>{project.contribution}</p></section>
+        <section class="detail-block"><h3>Challenges &amp; design considerations</h3><p>{project.challenge}</p></section>
+        <section class="detail-block"><h3>Outcome focus</h3><p>{project.outcome}</p></section>
+      </div>
+
+      <section class="modal-section" aria-labelledby="architecture-heading">
+        <h3 id="architecture-heading">Architecture</h3>
+        <ol class="architecture-flow"><template for:each={project.architecture} for:item="step"><li key={step}>{step}</li></template></ol>
+      </section>
+      <section class="modal-section" aria-labelledby="technology-heading">
+        <h3 id="technology-heading">Technology stack</h3>
+        <div class="chips"><template for:each={project.technologies} for:item="technology"><span key={technology} class="chip">{technology}</span></template></div>
+      </section>
+      <section class="modal-section" aria-labelledby="features-heading">
+        <h3 id="features-heading">Key features</h3>
+        <ul class="feature-list"><template for:each={project.features} for:item="feature"><li key={feature}>{feature}</li></template></ul>
+      </section>
+      <div class="modal-actions">
+        <template if:true={hasGithub}><a class="action-link" href={project.githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a></template>
+        <template if:true={hasDemo}><a class="action-link primary" href={project.demoUrl} target="_blank" rel="noopener noreferrer">Live Demo</a></template>
+        <template if:true={hasCaseStudy}><a class="action-link" href={project.caseStudyUrl} target="_blank" rel="noopener noreferrer">Case Study</a></template>
+      </div>
+    </section>
+    </section>
   </div>
 </template>

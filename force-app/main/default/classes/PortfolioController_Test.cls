@@ -17,16 +17,18 @@ private class PortfolioController_Test {
     @IsTest static void contentGetters() {
         Map<String, Object> d = PortfolioController.getPortfolioData();
         System.assertEquals(6, d.size());
-        System.assertEquals(3, PortfolioController.getProjects().size());
-        System.assertEquals(6, PortfolioController.getCertifications().size());
+        System.assertEquals(6, PortfolioController.getProjects().size());
+        System.assertEquals('Smart Medical Inventory & Transfer System', PortfolioController.getProjects()[0].get('title'));
+        System.assertEquals('', PortfolioController.getProjects()[0].get('githubUrl'), 'Do not expose a generic profile as a project repository.');
+        System.assertEquals(7, PortfolioController.getCertifications().size());
         System.assertEquals(2, PortfolioController.getExperience().size());
-        System.assertEquals(3, PortfolioController.getEducation().size());
+        System.assertEquals(1, PortfolioController.getEducation().size());
         System.assertEquals(6, PortfolioController.getSkills().size());
         System.assertEquals(210, PortfolioController.getAchievements().get('badges'));
     }
     @IsTest static void submitValid() {
         System.runAs(portfolioUser()) {
-            PortfolioController.submitContact(' Test ', ' a@b.com ', ' 123 ', ' Hi ', ' Hello ');
+            PortfolioController.submitContact(' Test ', ' a@b.com ', ' 123 ', ' Hi ', ' Hello ', null);
         }
         List<Portfolio_Contact__c> r = [SELECT Name__c, Email__c, Phone__c, Subject__c, Message__c, Status__c, Created_Date__c FROM Portfolio_Contact__c];
         System.assertEquals(1, r.size());
@@ -41,7 +43,7 @@ private class PortfolioController_Test {
     @IsTest static void submitInvalid() {
         try {
             System.runAs(portfolioUser()) {
-                PortfolioController.submitContact('', 'bad', null, '', '');
+                PortfolioController.submitContact('', 'bad', null, '', '', null);
             }
             System.assert(false, 'Expected exception');
         } catch (AuraHandledException e) {
@@ -52,11 +54,18 @@ private class PortfolioController_Test {
         String email = 'a'.leftPad(70, 'a') + '@example.com';
         try {
             System.runAs(portfolioUser()) {
-                PortfolioController.submitContact('Test', email, null, 'Hi', 'Hello');
+                PortfolioController.submitContact('Test', email, null, 'Hi', 'Hello', null);
             }
             System.assert(false, 'Expected exception for an email longer than the field limit');
         } catch (AuraHandledException e) {
             System.assertEquals(0, [SELECT COUNT() FROM Portfolio_Contact__c]);
         }
+    }
+
+    @IsTest static void honeypotSilentlyRejectsSpam() {
+        System.runAs(portfolioUser()) {
+            PortfolioController.submitContact('', 'invalid', null, '', '', 'bot-filled-field');
+        }
+        System.assertEquals(0, [SELECT COUNT() FROM Portfolio_Contact__c]);
     }
 }
